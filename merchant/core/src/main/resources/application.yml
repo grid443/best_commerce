@@ -1,0 +1,26 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/merchant
+    username: postgres
+    password: postgres
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    database: postgresql
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibenrate:
+        temp:
+          use_jdbc_metadata_defaults: false
+  liquibase:
+    change-log: classpath:db/liquibase-changelog.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health"

@@ -1,0 +1,79 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="1" author="Kirill Vasin">
+        <createTable tableName="product">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="version" type="INTEGER" remarks="Optimistic lock">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="merchant_id" type="UUID" remarks="Product owner ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(64)" remarks="Product name">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)" remarks="Detailed information about the product">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category" type="VARCHAR(32)" remarks="Product category">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unit_price" type="NUMBER(18, 2)" remarks="Unit price"/>
+            <column name="inventory" type="INT4" remarks="ЦФО точки выдачи">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createIndex tableName="product" indexName="idx_product_merchant_id">
+            <column name="merchant_id"/>
+        </createIndex>
+        <createIndex tableName="product" indexName="idx_product_unit_price">
+            <column name="unit_price"/>
+        </createIndex>
+        <createIndex tableName="product" indexName="idx_product_inventory">
+            <column name="inventory"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="2" author="Kirill Vasin">
+        <createTable tableName="payment_option">
+            <column name="name" type="VARCHAR(32)">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+        <createTable tableName="product_payment_option">
+            <column name="payment_option_name" type="VARCHAR(32)">
+                <constraints foreignKeyName="fk_product_payment_option_payment_option_name"
+                             referencedTableName="payment_option"
+                             referencedColumnNames="name" nullable="false" deferrable="true"/>
+            </column>
+            <column name="product_id" type="UUID">
+                <constraints foreignKeyName="fk_product_payment_option_product_id" referencedTableName="product"
+                             referencedColumnNames="id" nullable="false" deferrable="true"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="product_payment_option" columnNames="payment_option_name,product_id"/>
+    </changeSet>
+    <changeSet id="3" author="Kirill Vasin">
+        <createTable tableName="delivery_option">
+            <column name="name" type="VARCHAR(32)">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+        <createTable tableName="product_delivery_option">
+            <column name="delivery_option_name" type="VARCHAR(32)">
+                <constraints foreignKeyName="fk_product_delivery_option_delivery_option_name"
+                             referencedTableName="delivery_option"
+                             referencedColumnNames="name" nullable="false" deferrable="true"/>
+            </column>
+            <column name="product_id" type="UUID">
+                <constraints foreignKeyName="fk_product_delivery_option_product_id" referencedTableName="product"
+                             referencedColumnNames="id" nullable="false" deferrable="true"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="product_delivery_option" columnNames="delivery_option_name,product_id"/>
+    </changeSet>
+</databaseChangeLog>
