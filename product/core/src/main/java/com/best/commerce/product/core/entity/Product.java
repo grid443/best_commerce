@@ -61,14 +61,14 @@ public class Product {
   @Column(name = "inventory", nullable = false)
   private Integer inventory;
 
-  @ManyToMany(cascade = CascadeType.PERSIST)
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
   @JoinTable(
       name = "product_payment_option",
       joinColumns = @JoinColumn(name = "product_id"),
       inverseJoinColumns = @JoinColumn(name = "payment_option_name"))
   private Set<PaymentOption> paymentOptions;
 
-  @ManyToMany(cascade = CascadeType.PERSIST)
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
   @JoinTable(
       name = "product_delivery_option",
       joinColumns = @JoinColumn(name = "product_id"),

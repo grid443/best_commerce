@@ -1,5 +1,6 @@
 package com.best.commerce.product.core.util;
 
+import com.best.commerce.product.api.dto.ProductDto;
 import com.best.commerce.product.api.type.DeliveryOptionType;
 import com.best.commerce.product.api.type.PaymentOptionType;
 import com.best.commerce.product.api.type.ProductCategory;
@@ -23,6 +24,24 @@ public class Fixtures {
       Set<PaymentOption> paymentOptions,
       Set<DeliveryOption> deliveryOptions) {
     return Product.builder()
+        .merchantId(merchantId)
+        .name(name)
+        .description(randomString())
+        .category(ProductCategory.FASHION)
+        .unitPrice(randomMoney())
+        .inventory(inventory)
+        .paymentOptions(paymentOptions)
+        .deliveryOptions(deliveryOptions)
+        .build();
+  }
+
+  public static ProductDto buildProductDto(
+      UUID merchantId,
+      int inventory,
+      String name,
+      Set<PaymentOptionType> paymentOptions,
+      Set<DeliveryOptionType> deliveryOptions) {
+    return ProductDto.builder()
         .merchantId(merchantId)
         .name(name)
         .description(randomString())

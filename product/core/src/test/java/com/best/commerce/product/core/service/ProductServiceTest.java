@@ -5,13 +5,9 @@ import com.best.commerce.product.api.dto.ProductListRequest;
 import com.best.commerce.product.api.type.DeliveryOptionType;
 import com.best.commerce.product.api.type.PaymentOptionType;
 import com.best.commerce.product.core.ProductApplication;
-import com.best.commerce.product.core.entity.DeliveryOption;
-import com.best.commerce.product.core.entity.PaymentOption;
 import com.best.commerce.product.core.mapper.ProductMapperImpl;
-import com.best.commerce.product.core.repository.ProductRepository;
 import com.best.commerce.product.core.util.Fixtures;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +18,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.util.Assert;
 
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -33,27 +28,22 @@ import java.util.stream.Collectors;
     classes = {ProductApplication.class, ProductServiceImpl.class, ProductMapperImpl.class})
 public class ProductServiceTest {
   @Autowired private ProductService productService;
-  @Autowired private ProductRepository productRepository;
-
-  @BeforeEach
-  public void clearRepository() {
-    productRepository.deleteAll();
-  }
 
   @Test
   public void pagedResultSortByInventoryTest() {
     // given
     UUID merchantId = UUID.randomUUID();
-    Set<PaymentOption> paymentOptions =
-        Set.of(Fixtures.buildPaymentOption(PaymentOptionType.DIRECT));
-    Set<DeliveryOption> deliveryOptions =
-        Set.of(Fixtures.buildDeliveryOption(DeliveryOptionType.POSTAMAT));
+    Set<PaymentOptionType> paymentOptions = Set.of(PaymentOptionType.DIRECT);
+    Set<DeliveryOptionType> deliveryOptions = Set.of(DeliveryOptionType.POSTAMAT);
     var unexpectedProduct =
-        Fixtures.buildProduct(merchantId, 4, "X", paymentOptions, deliveryOptions);
-    var productA = Fixtures.buildProduct(merchantId, 5, "A", paymentOptions, deliveryOptions);
-    var productB = Fixtures.buildProduct(merchantId, 6, "B", paymentOptions, deliveryOptions);
-    var productC = Fixtures.buildProduct(merchantId, 7, "C", paymentOptions, deliveryOptions);
-    productRepository.saveAll(List.of(unexpectedProduct, productA, productB, productC));
+        Fixtures.buildProductDto(merchantId, 4, "X", paymentOptions, deliveryOptions);
+    productService.createProduct(unexpectedProduct);
+    var productA = Fixtures.buildProductDto(merchantId, 5, "A", paymentOptions, deliveryOptions);
+    productService.createProduct(productA);
+    var productB = Fixtures.buildProductDto(merchantId, 6, "B", paymentOptions, deliveryOptions);
+    productService.createProduct(productB);
+    var productC = Fixtures.buildProductDto(merchantId, 7, "C", paymentOptions, deliveryOptions);
+    productService.createProduct(productC);
     var resultSort = Sort.by(ProductListRequest.SortField.INVENTORY.getFieldName());
     var firstPageRequest = PageRequest.of(0, 2, resultSort);
     var secondPageRequest = PageRequest.of(1, 2, resultSort);
