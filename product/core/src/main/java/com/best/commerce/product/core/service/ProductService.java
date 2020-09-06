@@ -7,5 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ProductService {
+  ProductDto createProduct(ProductDto productDto);
+
   List<ProductDto> getMerchantProducts(UUID merchantId, Pageable pageable);
 }

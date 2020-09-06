@@ -21,6 +21,13 @@ public class ProductServiceImpl implements ProductService {
   private final ProductMapper productMapper;
 
   @Override
+  @Transactional
+  public ProductDto createProduct(ProductDto product) {
+    Product savedProduct = productRepository.save(productMapper.toEntity(product));
+    return productMapper.toDto(savedProduct);
+  }
+
+  @Override
   @Transactional(readOnly = true)
   public List<ProductDto> getMerchantProducts(UUID merchantId, Pageable pageable) {
     List<Product> productList =

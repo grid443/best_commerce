@@ -1,7 +1,7 @@
 package com.best.commerce.product.core.service;
 
 import com.best.commerce.product.api.dto.ProductDto;
-import com.best.commerce.product.api.messaging.payload.ProductListRequest;
+import com.best.commerce.product.api.dto.ProductListRequest;
 import com.best.commerce.product.api.type.DeliveryOptionType;
 import com.best.commerce.product.api.type.PaymentOptionType;
 import com.best.commerce.product.core.ProductApplication;

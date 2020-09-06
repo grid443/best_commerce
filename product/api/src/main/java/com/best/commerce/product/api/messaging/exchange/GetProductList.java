@@ -1,20 +1,24 @@
-package com.best.commerce.product.api.messaging.command;
+package com.best.commerce.product.api.messaging.exchange;
 
 import com.best.commerce.messaging.api.Exchange;
-import com.best.commerce.product.api.messaging.payload.ProductListRequest;
+import com.best.commerce.product.api.dto.ProductListRequest;
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class GetProductList implements Exchange<ProductListRequest> {
   public static final String ROUTING_KEY = "product.list";
   public static final String EXCHANGE = "product.list.exchange";
   public static final String QUEUE = "product.list.queue";
 
-  private ProductListRequest pageable;
+  private ProductListRequest productListRequest;
 
   @Override
   public ProductListRequest payload() {
-    return pageable;
+    return productListRequest;
   }
 
   @Override

@@ -8,11 +8,12 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>BestCommerce</name>
     <description>BestCommerce</description>
+    <packaging>pom</packaging>
 
     <modules>
         <module>messaging-api</module>
-        <module>api-gateway</module>
         <module>product</module>
         <module>merchant</module>
+        <module>api-gateway</module>
     </modules>
 </project>

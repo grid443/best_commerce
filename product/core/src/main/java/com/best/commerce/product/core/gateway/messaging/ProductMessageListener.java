@@ -1,10 +1,12 @@
 package com.best.commerce.product.core.gateway.messaging;
 
 import com.best.commerce.product.api.dto.ProductDto;
-import com.best.commerce.product.api.messaging.command.GetProductList;
-import com.best.commerce.product.api.messaging.payload.ProductListRequest;
+import com.best.commerce.product.api.dto.ProductListRequest;
+import com.best.commerce.product.api.messaging.command.CreateProduct;
+import com.best.commerce.product.api.messaging.exchange.GetProductList;
 import com.best.commerce.product.core.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,16 +17,30 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class ProductMessageListener {
   private final ProductService productService;
 
+  @RabbitListener(queues = CreateProduct.QUEUE)
+  public void createProduct(CreateProduct request) {
+    log.info("create product request {}", request);
+    ProductDto product = request.payload();
+    ProductDto savedProduct = productService.createProduct(product);
+    log.info("product {} created", savedProduct);
+  }
+
   @RabbitListener(queues = GetProductList.QUEUE)
-  public List<ProductDto> getMerchantProducts(ProductListRequest request) {
+  public List<ProductDto> getMerchantProducts(GetProductList request) {
+    log.info("merchant product list request {}", request);
+    ProductListRequest payload = request.payload();
     Pageable pageable =
         PageRequest.of(
-            request.getPageNumber(),
-            request.getPageSize(),
-            Sort.by(request.getSortField().getFieldName()));
-    return productService.getMerchantProducts(request.getMerchantId(), pageable);
+            payload.getPageNumber(),
+            payload.getPageSize(),
+            Sort.by(payload.getSortField().getFieldName()));
+    List<ProductDto> merchantProducts =
+        productService.getMerchantProducts(payload.getMerchantId(), pageable);
+    log.info("merchant product list request: {} response: {}", request, merchantProducts);
+    return merchantProducts;
   }
 }

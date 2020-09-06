@@ -12,6 +12,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Merchant API</name>
 	<description>Merchant API</description>
+    <packaging>jar</packaging>
 
 	<dependencies>
         <dependency>

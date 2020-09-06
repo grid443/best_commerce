@@ -1,7 +1,16 @@
 server:
-  port: 8081
   servlet:
     context-path: /api
+
+spring:
+  rabbitmq:
+    host: ${RABBIT_HOST}
+    port: ${RABBIT_PORT}
+    username: ${RABBIT_LOGIN}
+    password: ${RABBIT_PASSWORD}
+
+swagger:
+  enabled: ${SWAGGER_ENABLED}
 
 management:
   endpoints:

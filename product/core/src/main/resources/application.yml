@@ -1,11 +1,9 @@
-server:
-  port: 8082
-
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/partner
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}/partner
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     database: postgresql
@@ -17,12 +15,12 @@ spring:
         temp:
           use_jdbc_metadata_defaults: false
   liquibase:
-    change-log: classpath:db/liquibase-changelog.xml
+    change-log: classpath:db/liquibase-changelog.xml  
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: admin
-    password: secret
+    host: ${RABBIT_HOST}
+    port: ${RABBIT_PORT}
+    username: ${RABBIT_LOGIN}
+    password: ${RABBIT_PASSWORD}
 
 management:
   endpoints:

@@ -27,24 +27,54 @@ public abstract class ProductMapper {
   @Mapping(
       target = "deliveryOptions",
       source = "deliveryOptions",
-      qualifiedByName = "deliveryOptionToDto")
+      qualifiedByName = "deliveryOptionsToDto")
   public abstract ProductDto toDto(Product product);
+
+  @Mapping(
+      target = "paymentOptions",
+      source = "paymentOptions",
+      qualifiedByName = "paymentOptionsToEntity")
+  @Mapping(
+      target = "deliveryOptions",
+      source = "deliveryOptions",
+      qualifiedByName = "deliveryOptionsToEntity")
+  public abstract Product toEntity(ProductDto product);
 
   public abstract List<ProductDto> productsToDtoList(Collection<Product> products);
 
-  @Named("paymentOptionToDto")
-  public Set<PaymentOptionType> paymentOptionsToDto(Set<PaymentOption> paymentOptions) {
+  @Named("paymentOptionsToDto")
+  Set<PaymentOptionType> paymentOptionsToDto(Set<PaymentOption> paymentOptions) {
     if (CollectionUtils.isEmpty(paymentOptions)) {
       return Collections.emptySet();
     }
     return paymentOptions.stream().map(PaymentOption::getName).collect(Collectors.toSet());
   }
 
-  @Named("deliveryOptionToDto")
-  public Set<DeliveryOptionType> deliveryOptionsToDto(Set<DeliveryOption> deliveryOptions) {
+  @Named("deliveryOptionsToDto")
+  Set<DeliveryOptionType> deliveryOptionsToDto(Set<DeliveryOption> deliveryOptions) {
     if (CollectionUtils.isEmpty(deliveryOptions)) {
       return Collections.emptySet();
     }
     return deliveryOptions.stream().map(DeliveryOption::getName).collect(Collectors.toSet());
+  }
+
+  @Named("paymentOptionsToEntity")
+  Set<PaymentOption> paymentOptionsToEntity(Set<PaymentOptionType> paymentOptions) {
+    if (CollectionUtils.isEmpty(paymentOptions)) {
+      return Collections.emptySet();
+    }
+    return paymentOptions.stream().map(
+        option -> PaymentOption.builder().name(option).build()
+    ).collect(Collectors.toSet());
+  }
+  
+  @Named("deliveryOptionsToEntity")
+  Set<DeliveryOption> deliveryOptionsToEntity(Set<DeliveryOptionType> deliveryOptions) {
+    if (CollectionUtils.isEmpty(deliveryOptions)) {
+      return Collections.emptySet();
+    }
+    return deliveryOptions.stream().map(
+        option -> DeliveryOption.builder().name(option).build()
+    ).collect(Collectors.toSet());
   }
 }

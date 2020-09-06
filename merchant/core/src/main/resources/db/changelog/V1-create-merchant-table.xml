@@ -30,7 +30,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <createIndex tableName="product" indexName="idx_merchant_login">
+        <createIndex tableName="merchant" indexName="idx_merchant_login">
             <column name="login"/>
         </createIndex>
     </changeSet>

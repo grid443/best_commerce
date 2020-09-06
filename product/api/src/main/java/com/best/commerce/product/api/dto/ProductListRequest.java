@@ -1,4 +1,4 @@
-package com.best.commerce.product.api.messaging.payload;
+package com.best.commerce.product.api.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

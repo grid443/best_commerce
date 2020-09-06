@@ -30,6 +30,7 @@
         <messaging.api.version>0.0.1-SNAPSHOT</messaging.api.version>
         <product.api.version>0.0.1-SNAPSHOT</product.api.version>
         
+        <postgresql.driver.version>42.2.16</postgresql.driver.version>
         <h2.version>1.4.200</h2.version>
     </properties>
 
@@ -59,6 +60,13 @@
                 <groupId>com.best.commerce.product</groupId>
                 <artifactId>api</artifactId>
                 <version>${product.api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <scope>runtime</scope>
+                <version>${postgresql.driver.version}</version>
             </dependency>
 
             <dependency>

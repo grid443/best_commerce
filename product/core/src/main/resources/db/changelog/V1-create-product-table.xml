@@ -46,16 +46,13 @@
         </createTable>
         <createTable tableName="product_payment_option">
             <column name="payment_option_name" type="VARCHAR(32)">
-                <constraints foreignKeyName="fk_product_payment_option_payment_option_name"
-                             referencedTableName="payment_option"
-                             referencedColumnNames="name" nullable="false" deferrable="true"/>
+                <constraints nullable="false"/>
             </column>
             <column name="product_id" type="UUID">
-                <constraints foreignKeyName="fk_product_payment_option_product_id" referencedTableName="product"
-                             referencedColumnNames="id" nullable="false" deferrable="true"/>
+                <constraints nullable="false"/>
             </column>
         </createTable>
-        <addPrimaryKey tableName="product_payment_option" columnNames="payment_option_name,product_id"/>
+        <addPrimaryKey tableName="product_payment_option" columnNames="product_id,payment_option_name"/>
     </changeSet>
     <changeSet id="3" author="Kirill Vasin">
         <createTable tableName="delivery_option">
@@ -65,15 +62,12 @@
         </createTable>
         <createTable tableName="product_delivery_option">
             <column name="delivery_option_name" type="VARCHAR(32)">
-                <constraints foreignKeyName="fk_product_delivery_option_delivery_option_name"
-                             referencedTableName="delivery_option"
-                             referencedColumnNames="name" nullable="false" deferrable="true"/>
+                <constraints nullable="false"/>
             </column>
             <column name="product_id" type="UUID">
-                <constraints foreignKeyName="fk_product_delivery_option_product_id" referencedTableName="product"
-                             referencedColumnNames="id" nullable="false" deferrable="true"/>
+                <constraints nullable="false"/>
             </column>
         </createTable>
-        <addPrimaryKey tableName="product_delivery_option" columnNames="delivery_option_name,product_id"/>
+        <addPrimaryKey tableName="product_delivery_option" columnNames="product_id,delivery_option_name"/>
     </changeSet>
 </databaseChangeLog>
