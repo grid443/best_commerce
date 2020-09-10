@@ -5,31 +5,39 @@ import com.best.commerce.product.api.dto.ProductDto;
 import com.best.commerce.product.api.dto.ProductListRequest;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "${cors.allowed-origins}")
 @RestController
-@RequestMapping(path = "/product")
+@RequestMapping(path = "/v1/product")
 @RequiredArgsConstructor
 public class ProductController {
 
   private final ProductService productService;
 
-  @PostMapping
-  public void createProduct(ProductDto product) {
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+  @ApiOperation(value = "Create new product")
+  public void createProduct(@Valid @RequestBody ProductDto product) {
     productService.createProduct(product);
   }
 
-  @PostMapping("/list")
+  @PostMapping(
+      path = "/list",
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
   @ApiOperation(
       value = "Get list of products",
       response = ProductDto.class,
       responseContainer = "list")
-  public List<ProductDto> getMerchantProducts(@RequestBody ProductListRequest request) {
+  public List<ProductDto> getMerchantProducts(@Valid @RequestBody ProductListRequest request) {
     return productService.getMerchantProducts(request);
   }
 }

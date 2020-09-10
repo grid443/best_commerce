@@ -21,7 +21,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ProductDto {
-  @NotNull private UUID id;
+  private UUID id;
   @NotNull private UUID merchantId;
   @NotEmpty private String name;
   private String description;

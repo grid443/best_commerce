@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Builder
@@ -15,17 +17,22 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ProductListRequest {
-  private UUID merchantId;
+  @NotNull private UUID merchantId;
+
+  @Min(0)
   private int pageNumber;
+
+  @Min(0)
   private int pageSize;
-  private SortField sortField;
-  
+
+  @NotNull private SortField sortField;
+
   @RequiredArgsConstructor
   @Getter
   public enum SortField {
     UNIT_PRICE("unitPrice"),
     INVENTORY("inventory");
-    
+
     private final String fieldName;
   }
 }

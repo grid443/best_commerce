@@ -1,6 +1,3 @@
-server:
-  port: 8081
-  
 spring:
   rabbitmq:
     host: localhost
@@ -9,7 +6,7 @@ spring:
     password: guest
 
 cors:
-  allowed-origins: http://localhost:${server.port}
+  allowed-origins: http://localhost:8081
 
 swagger:
-  enabled: true
+  enabled: false
