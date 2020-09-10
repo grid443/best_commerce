@@ -5,7 +5,16 @@ import com.best.commerce.product.api.dto.ProductListRequest;
 
 import java.util.List;
 
+/** Service that manages merchant's products */
 public interface ProductService {
+  /** Create new product */
   void createProduct(ProductDto product);
+
+  /**
+   * Get page of merchant's products
+   *
+   * @param request product filter
+   * @return found products
+   */
   List<ProductDto> getMerchantProducts(ProductListRequest request);
 }
