@@ -13,11 +13,9 @@ import com.best.commerce.product.core.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -55,58 +53,77 @@ public class ProductServiceImpl implements ProductService {
   }
 
   private void mergePaymentOptions(Product product) {
-    Set<PaymentOption> paymentOptions = product.getPaymentOptions();
-    if (CollectionUtils.isEmpty(paymentOptions)) {
+    if (CollectionUtils.isEmpty(product.getPaymentOptions())) {
       return;
     }
-    Set<PaymentOptionType> paymentOptionTypes =
-        paymentOptions.stream().map(PaymentOption::getName).collect(Collectors.toSet());
     List<PaymentOption> existingPaymentOptions =
-        paymentOptionRepository.findAllById(paymentOptionTypes);
+        findExistingPaymentOptions(product.getPaymentOptions());
     if (CollectionUtils.isEmpty(existingPaymentOptions)) {
       return;
     }
-    if (paymentOptions.size() == existingPaymentOptions.size()) {
+    boolean allOptionsExists =
+        (product.getPaymentOptions().size() == existingPaymentOptions.size());
+    if (allOptionsExists) {
       product.setPaymentOptions(Set.copyOf(existingPaymentOptions));
       return;
     }
-    Map<PaymentOptionType, PaymentOption> paymentOptionById =
-        existingPaymentOptions.stream()
+    mergeExistingPaymentOptions(product, existingPaymentOptions);
+  }
+
+  private List<PaymentOption> findExistingPaymentOptions(Set<PaymentOption> paymentOptions) {
+    Set<PaymentOptionType> paymentOptionIds =
+        paymentOptions.stream().map(PaymentOption::getName).collect(Collectors.toSet());
+    return paymentOptionRepository.findAllById(paymentOptionIds);
+  }
+
+  private void mergeExistingPaymentOptions(Product product, List<PaymentOption> existingOptions) {
+    Map<PaymentOptionType, PaymentOption> existingPaymentOptionById =
+        existingOptions.stream()
             .collect(Collectors.toMap(PaymentOption::getName, Function.identity()));
-    Set<PaymentOption> updatedPaymentOptions = new HashSet<>();
-    for (PaymentOption paymentOption : paymentOptions) {
-      PaymentOption updatedOption =
-          paymentOptionById.computeIfAbsent(paymentOption.getName(), (key) -> paymentOption);
-      updatedPaymentOptions.add(updatedOption);
-    }
+    Set<PaymentOption> updatedPaymentOptions =
+        product.getPaymentOptions().stream()
+            .map(
+                paymentOption ->
+                    existingPaymentOptionById.computeIfAbsent(
+                        paymentOption.getName(), (key) -> paymentOption))
+            .collect(Collectors.toSet());
     product.setPaymentOptions(updatedPaymentOptions);
   }
 
   private void mergeDeliveryOptions(Product product) {
-    Set<DeliveryOption> deliveryOptions = product.getDeliveryOptions();
-    if (CollectionUtils.isEmpty(deliveryOptions)) {
+    if (CollectionUtils.isEmpty(product.getDeliveryOptions())) {
       return;
     }
-    Set<DeliveryOptionType> deliveryOptionTypes =
-        deliveryOptions.stream().map(DeliveryOption::getName).collect(Collectors.toSet());
-    List<DeliveryOption> existingDeliveryOptions =
-        deliveryOptionRepository.findAllById(deliveryOptionTypes);
-    if (CollectionUtils.isEmpty(existingDeliveryOptions)) {
+    List<DeliveryOption> existingOptions =
+        findExistingDeliveryOptions(product.getDeliveryOptions());
+    if (CollectionUtils.isEmpty(existingOptions)) {
       return;
     }
-    if (deliveryOptions.size() == existingDeliveryOptions.size()) {
-      product.setDeliveryOptions(Set.copyOf(existingDeliveryOptions));
+    boolean allOptionsExists = (product.getDeliveryOptions().size() == existingOptions.size());
+    if (allOptionsExists) {
+      product.setDeliveryOptions(Set.copyOf(existingOptions));
       return;
     }
-    Map<DeliveryOptionType, DeliveryOption> deliveryOptionById =
-        existingDeliveryOptions.stream()
+    mergeExistingDeliveryOptions(product, existingOptions);
+  }
+
+  private void mergeExistingDeliveryOptions(Product product, List<DeliveryOption> existingOptions) {
+    Map<DeliveryOptionType, DeliveryOption> existingDeliveryOptionById =
+        existingOptions.stream()
             .collect(Collectors.toMap(DeliveryOption::getName, Function.identity()));
-    Set<DeliveryOption> updatedDeliveryOptions = new HashSet<>();
-    for (DeliveryOption deliveryOption : deliveryOptions) {
-      DeliveryOption updatedOption =
-          deliveryOptionById.computeIfAbsent(deliveryOption.getName(), (key) -> deliveryOption);
-      updatedDeliveryOptions.add(updatedOption);
-    }
+    Set<DeliveryOption> updatedDeliveryOptions =
+        product.getDeliveryOptions().stream()
+            .map(
+                deliveryOption ->
+                    existingDeliveryOptionById.computeIfAbsent(
+                        deliveryOption.getName(), (key) -> deliveryOption))
+            .collect(Collectors.toSet());
     product.setDeliveryOptions(updatedDeliveryOptions);
+  }
+
+  private List<DeliveryOption> findExistingDeliveryOptions(Set<DeliveryOption> deliveryOptions) {
+    Set<DeliveryOptionType> deliveryOptionIds =
+        deliveryOptions.stream().map(DeliveryOption::getName).collect(Collectors.toSet());
+    return deliveryOptionRepository.findAllById(deliveryOptionIds);
   }
 }
