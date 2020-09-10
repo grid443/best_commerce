@@ -1,5 +1,17 @@
 # Best Commerce Application
 
+## Description
+
+The Best Commerce application allows merchants to create an account and add products<br/>
+
+Microservices:
+* Gateway API
+* Merchant
+* Product
+
+Libraries:
+* Messaging API
+
 ## Local build
 
 * Install RabbitMQ
@@ -74,3 +86,25 @@ Than you can build other modules:
 > cd product
 > docker build -t product:0.0.1 .
 ```
+
+## Development
+
+The project uses [google-java-format-plugin](https://github.com/google/google-java-format)
+
+Microservices consist of two modules - API and core. API modules must contain only interfaces and DTOs.
+It can be used as a compile time dependency in other modules. Core modules should never be used as a dependency anywhere.
+
+## Test coverage
+
+Project uses [JaCoCo Maven Plug-In](https://www.jacoco.org/jacoco/trunk/doc/maven.html) to keep track of test coverage.
+This plugin generates a report after the `mvn package` stage in the target directory.<br/>
+`target/jacoco.exec` is report in binary format. It can be used in sonar cube.<br/>
+`target/site/jacoco` contains report in various human-readable formats.
+
+##TBD:
+
+- implement merchant functionality
+- add spring security. [keycloak](https://www.keycloak.org/) can be used as an Identity Provider
+- we either decide that we can trust RabbitMQ authorization and add merchant id into the request in Gateway API module
+form its security context, or we can add JWT token into message header and implement custom library to validate
+the token on each message in the resource servers (merchant, partner) and set security context for the request
