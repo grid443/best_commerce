@@ -42,7 +42,7 @@ Create durable queues:<br/>
 
 `> docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d postgres`
 
-Create databases
+* Create databases
 
 ```
 > docker exec -it postgis bash
