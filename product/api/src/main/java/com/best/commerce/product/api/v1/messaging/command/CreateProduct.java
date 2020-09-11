@@ -1,7 +1,7 @@
-package com.best.commerce.product.api.messaging.command;
+package com.best.commerce.product.api.v1.messaging.command;
 
-import com.best.commerce.messaging.api.Command;
-import com.best.commerce.product.api.dto.ProductDto;
+import com.best.commerce.messaging.api.v1.Command;
+import com.best.commerce.product.api.v1.dto.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

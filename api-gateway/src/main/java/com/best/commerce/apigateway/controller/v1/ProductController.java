@@ -1,8 +1,9 @@
-package com.best.commerce.apigateway.controller;
+package com.best.commerce.apigateway.controller.v1;
 
 import com.best.commerce.apigateway.service.ProductService;
-import com.best.commerce.product.api.dto.ProductDto;
-import com.best.commerce.product.api.dto.ProductListRequest;
+import com.best.commerce.product.api.v1.dto.ProductDto;
+import com.best.commerce.product.api.v1.dto.ProductListRequest;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -19,6 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/v1/product")
 @RequiredArgsConstructor
+@Api("Product operations")
 public class ProductController {
 
   private final ProductService productService;

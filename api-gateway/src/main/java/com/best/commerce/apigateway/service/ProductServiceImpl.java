@@ -1,9 +1,9 @@
 package com.best.commerce.apigateway.service;
 
-import com.best.commerce.product.api.dto.ProductDto;
-import com.best.commerce.product.api.dto.ProductListRequest;
-import com.best.commerce.product.api.messaging.command.CreateProduct;
-import com.best.commerce.product.api.messaging.exchange.GetProductList;
+import com.best.commerce.product.api.v1.dto.ProductDto;
+import com.best.commerce.product.api.v1.dto.ProductListRequest;
+import com.best.commerce.product.api.v1.messaging.command.CreateProduct;
+import com.best.commerce.product.api.v1.messaging.exchange.GetProductList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;

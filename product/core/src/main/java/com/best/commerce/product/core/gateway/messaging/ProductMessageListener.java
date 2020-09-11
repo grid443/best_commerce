@@ -1,9 +1,9 @@
 package com.best.commerce.product.core.gateway.messaging;
 
-import com.best.commerce.product.api.dto.ProductDto;
-import com.best.commerce.product.api.dto.ProductListRequest;
-import com.best.commerce.product.api.messaging.command.CreateProduct;
-import com.best.commerce.product.api.messaging.exchange.GetProductList;
+import com.best.commerce.product.api.v1.dto.ProductDto;
+import com.best.commerce.product.api.v1.dto.ProductListRequest;
+import com.best.commerce.product.api.v1.messaging.command.CreateProduct;
+import com.best.commerce.product.api.v1.messaging.exchange.GetProductList;
 import com.best.commerce.product.core.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

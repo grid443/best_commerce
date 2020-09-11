@@ -3,8 +3,8 @@ package com.best.commerce.apigateway.controller;
 import com.best.commerce.apigateway.ApiGatewayApplication;
 import com.best.commerce.apigateway.service.ProductServiceImpl;
 import com.best.commerce.apigateway.util.Fixtures;
-import com.best.commerce.product.api.dto.ProductDto;
-import com.best.commerce.product.api.messaging.command.CreateProduct;
+import com.best.commerce.product.api.v1.dto.ProductDto;
+import com.best.commerce.product.api.v1.messaging.command.CreateProduct;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,8 +28,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import java.util.List;
 import java.util.Set;
 
-import static com.best.commerce.product.api.type.DeliveryOptionType.DIRECT;
-import static com.best.commerce.product.api.type.PaymentOptionType.INSTALLMENTS;
+import static com.best.commerce.product.api.v1.type.DeliveryOptionType.DIRECT;
+import static com.best.commerce.product.api.v1.type.PaymentOptionType.INSTALLMENTS;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

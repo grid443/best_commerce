@@ -1,7 +1,7 @@
 package com.best.commerce.product.core.config;
 
-import com.best.commerce.product.api.messaging.command.CreateProduct;
-import com.best.commerce.product.api.messaging.exchange.GetProductList;
+import com.best.commerce.product.api.v1.messaging.command.CreateProduct;
+import com.best.commerce.product.api.v1.messaging.exchange.GetProductList;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;

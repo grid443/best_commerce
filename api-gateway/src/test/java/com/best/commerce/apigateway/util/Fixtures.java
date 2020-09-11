@@ -1,9 +1,9 @@
 package com.best.commerce.apigateway.util;
 
-import com.best.commerce.product.api.dto.ProductDto;
-import com.best.commerce.product.api.type.DeliveryOptionType;
-import com.best.commerce.product.api.type.PaymentOptionType;
-import com.best.commerce.product.api.type.ProductCategory;
+import com.best.commerce.product.api.v1.dto.ProductDto;
+import com.best.commerce.product.api.v1.type.DeliveryOptionType;
+import com.best.commerce.product.api.v1.type.PaymentOptionType;
+import com.best.commerce.product.api.v1.type.ProductCategory;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

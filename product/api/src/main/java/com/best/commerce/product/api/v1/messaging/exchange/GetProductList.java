@@ -1,7 +1,7 @@
-package com.best.commerce.product.api.messaging.exchange;
+package com.best.commerce.product.api.v1.messaging.exchange;
 
-import com.best.commerce.messaging.api.Exchange;
-import com.best.commerce.product.api.dto.ProductListRequest;
+import com.best.commerce.messaging.api.v1.Exchange;
+import com.best.commerce.product.api.v1.dto.ProductListRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,9 +1,9 @@
 package com.best.commerce.product.core.util;
 
-import com.best.commerce.product.api.dto.ProductDto;
-import com.best.commerce.product.api.type.DeliveryOptionType;
-import com.best.commerce.product.api.type.PaymentOptionType;
-import com.best.commerce.product.api.type.ProductCategory;
+import com.best.commerce.product.api.v1.dto.ProductDto;
+import com.best.commerce.product.api.v1.type.DeliveryOptionType;
+import com.best.commerce.product.api.v1.type.PaymentOptionType;
+import com.best.commerce.product.api.v1.type.ProductCategory;
 import com.best.commerce.product.core.entity.DeliveryOption;
 import com.best.commerce.product.core.entity.PaymentOption;
 import com.best.commerce.product.core.entity.Product;

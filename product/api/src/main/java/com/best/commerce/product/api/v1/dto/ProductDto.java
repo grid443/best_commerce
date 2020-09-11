@@ -1,8 +1,8 @@
-package com.best.commerce.product.api.dto;
+package com.best.commerce.product.api.v1.dto;
 
-import com.best.commerce.product.api.type.DeliveryOptionType;
-import com.best.commerce.product.api.type.PaymentOptionType;
-import com.best.commerce.product.api.type.ProductCategory;
+import com.best.commerce.product.api.v1.type.DeliveryOptionType;
+import com.best.commerce.product.api.v1.type.PaymentOptionType;
+import com.best.commerce.product.api.v1.type.ProductCategory;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

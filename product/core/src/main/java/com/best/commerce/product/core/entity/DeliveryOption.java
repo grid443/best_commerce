@@ -1,6 +1,6 @@
 package com.best.commerce.product.core.entity;
 
-import com.best.commerce.product.api.type.DeliveryOptionType;
+import com.best.commerce.product.api.v1.type.DeliveryOptionType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

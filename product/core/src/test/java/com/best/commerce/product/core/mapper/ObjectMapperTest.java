@@ -1,7 +1,7 @@
 package com.best.commerce.product.core.mapper;
 
-import com.best.commerce.product.api.messaging.exchange.GetProductList;
-import com.best.commerce.product.api.dto.ProductListRequest;
+import com.best.commerce.product.api.v1.messaging.exchange.GetProductList;
+import com.best.commerce.product.api.v1.dto.ProductListRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;

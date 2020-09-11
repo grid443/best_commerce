@@ -1,9 +1,9 @@
 package com.best.commerce.product.core.service;
 
-import com.best.commerce.product.api.dto.ProductDto;
-import com.best.commerce.product.api.dto.ProductListRequest;
-import com.best.commerce.product.api.type.DeliveryOptionType;
-import com.best.commerce.product.api.type.PaymentOptionType;
+import com.best.commerce.product.api.v1.dto.ProductDto;
+import com.best.commerce.product.api.v1.dto.ProductListRequest;
+import com.best.commerce.product.api.v1.type.DeliveryOptionType;
+import com.best.commerce.product.api.v1.type.PaymentOptionType;
 import com.best.commerce.product.core.ProductApplication;
 import com.best.commerce.product.core.mapper.ProductMapperImpl;
 import com.best.commerce.product.core.util.Fixtures;

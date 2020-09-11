@@ -1,4 +1,4 @@
-package com.best.commerce.product.api.dto;
+package com.best.commerce.product.api.v1.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

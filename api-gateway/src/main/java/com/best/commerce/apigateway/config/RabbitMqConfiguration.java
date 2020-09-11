@@ -1,6 +1,6 @@
 package com.best.commerce.apigateway.config;
 
-import com.best.commerce.product.api.messaging.exchange.GetProductList;
+import com.best.commerce.product.api.v1.messaging.exchange.GetProductList;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;

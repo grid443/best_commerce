@@ -1,6 +1,6 @@
 package com.best.commerce.merchant.core.entity;
 
-import com.best.commerce.inventory.api.type.MerchantType;
+import com.best.commerce.inventory.api.v1.type.MerchantType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,7 @@
 package com.best.commerce.apigateway.service;
 
-import com.best.commerce.product.api.dto.ProductDto;
-import com.best.commerce.product.api.dto.ProductListRequest;
+import com.best.commerce.product.api.v1.dto.ProductDto;
+import com.best.commerce.product.api.v1.dto.ProductListRequest;
 
 import java.util.List;
 

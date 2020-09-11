@@ -1,6 +1,6 @@
 package com.best.commerce.product.core.service;
 
-import com.best.commerce.product.api.dto.ProductDto;
+import com.best.commerce.product.api.v1.dto.ProductDto;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
