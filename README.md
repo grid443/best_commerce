@@ -97,14 +97,17 @@ It can be used as a compile time dependency in other modules. Core modules shoul
 ## Test coverage
 
 Project uses [JaCoCo Maven Plug-In](https://www.jacoco.org/jacoco/trunk/doc/maven.html) to keep track of test coverage.
-This plugin generates a report after the `mvn package` stage in the target directory.<br/>
-`target/jacoco.exec` is report in binary format. It can be used in sonar cube.<br/>
-`target/site/jacoco` contains report in various human-readable formats.
+This plugin generates a report after the `mvn package` stage in the target directory
+* `target/jacoco.exec` is report in binary format. It can be used in sonar cube
+* `target/site/jacoco` contains report in various human-readable formats
 
-##TBD:
+##TBD
 
-- implement merchant functionality
+- error handling
+- implement merchant functionality (sign-up, sign-in)
 - add spring security. [keycloak](https://www.keycloak.org/) can be used as an Identity Provider
 - we either decide that we can trust RabbitMQ authorization and add merchant id into the request in Gateway API module
 form its security context, or we can add JWT token into message header and implement custom library to validate
 the token on each message in the resource servers (merchant, partner) and set security context for the request
+- consider replacing RabbitMQ RPC calls with HTTP
+- configure JaCoCO Plug-In to set minimum requirements for the test coverage
