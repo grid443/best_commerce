@@ -101,7 +101,7 @@ This plugin generates a report after the `mvn package` stage in the target direc
 * `target/jacoco.exec` is report in binary format. It can be used in sonar cube
 * `target/site/jacoco` contains report in various human-readable formats
 
-##TBD
+## TBD
 
 - error handling
 - implement merchant functionality (sign-up, sign-in)
